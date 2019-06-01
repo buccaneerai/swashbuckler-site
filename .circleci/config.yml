@@ -1,21 +1,55 @@
+build_defaults: &build_defaults
+  docker:
+    - image: circleci/node:10-stretch
+      auth:
+        username: $DOCKER_USER
+        password: $DOCKER_PASS
+  environment:
+    STAGE: local
+    SERVICE_NAME: swashbuckler-site
+
 version: 2
 jobs:
   build:
-    docker:
-      - image: circleci/node:7.10
-    working_directory: ~/repo
+    <<: *build_defaults
     steps:
       - checkout
-      # Download and cache dependencies
+      - run:
+          name: Add node_modules/bin to PATH
+          command: echo 'export PATH=~/project/node_modules/.bin:$PATH' >> $BASH_ENV
       - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
-      - run: yarn install
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: Install dependencies
+          command: yarn
       - save_cache:
           paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-      # run tests!
-      - run: yarn test
+            ~/.cache/yarn
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: Build
+          command: CI=false yarn build
+      # - run:
+      #     name: Lint
+      #     command: yarn run lint
+      # - run:
+      #     name: Test
+      #     command: yarn test
+      # - run:
+      #     name: Security check for npm packages
+      #     command: nsp check
+      - setup_remote_docker
+      - deploy:
+          name: Deploy to prod
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              docker login -u $DOCKER_USER -p $DOCKER_PASS
+              docker build -f ./Dockerfile --rm=false -t buccaneerai/$SERVICE_NAME:$CIRCLE_SHA1 .
+              docker push buccaneerai/$SERVICE_NAME:$CIRCLE_SHA1
+            fi
+workflows:
+  version: 2
+  build_test_deploy:
+      jobs:
+        - build:
+            context: buccaneer
