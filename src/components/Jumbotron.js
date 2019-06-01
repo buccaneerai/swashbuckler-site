@@ -49,14 +49,22 @@ const Jumbotron = function Jumbotron({
               {body}
             </p>
             <div>
-              <button class="btn btn-primary btn-outline-light btn-lg">
-                Get Started
-              </button>
-              {'  '}
-              <button class="btn btn-primary btn-outline-light btn-lg">
-                Documentation
-              </button>
-              {'  '}
+              <a href="https://docs.swashbuckler.ai/quickstart">
+                <Button color='light' outline size='lg'>
+                  Get Started
+                </Button>
+              </a>
+              <a href="https://docs.swashbuckler.ai">
+                <Button color='light' outline size='lg' style={{marginLeft: '1em'}}>
+                  Documentation
+                </Button>
+              </a>
+              <a href="https://github.com/buccaneerai/swashbuckler">
+                <Button color='light' outline size='lg' style={{marginLeft: '1em'}}>
+                  <i className='fab fa-github'/>{' '}
+                  GitHub
+                </Button>
+              </a>
             </div>
           </Col>
           <Col md={{offset: 2, size: 4}} style={{marginTop: '10vh'}}>
