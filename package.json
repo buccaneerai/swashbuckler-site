@@ -22,10 +22,12 @@
     "reactstrap": "^7.0.2",
     "round-to": "^4.0.0",
     "rxjs": "^6.3.3",
+    "serve": "^11.0.1",
     "victory": "^32.2.3"
   },
   "scripts": {
     "start": "react-scripts start",
+    "start-server": "serve -s build -l $PORT",
     "build": "react-scripts build",
     "start-container": "node container.js",
     "test": "react-scripts test",
