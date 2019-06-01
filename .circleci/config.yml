@@ -1,0 +1,65 @@
+build_defaults: &build_defaults
+  docker:
+    - image: circleci/node:10-stretch
+      auth:
+        username: $DOCKER_USER
+        password: $DOCKER_PASS
+  environment:
+    STAGE: local
+    SERVICE_NAME: buccaneer-site
+
+version: 2
+jobs:
+  build:
+    <<: *build_defaults
+    steps:
+      - checkout
+      - run:
+          name: Add node_modules/bin to PATH
+          command: echo 'export PATH=~/project/node_modules/.bin:$PATH' >> $BASH_ENV
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: Install dependencies
+          command: yarn
+      - save_cache:
+          paths:
+            ~/.cache/yarn
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: Build
+          command: CI=false yarn build
+      # - run:
+      #     name: Lint
+      #     command: yarn run lint
+      - run:
+          name: Test
+          command: yarn test
+      # - run:
+      #     name: Security check for npm packages
+      #     command: nsp check
+      - setup_remote_docker
+      - deploy:
+          name: Deploy to dev
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "dev" ]; then
+              docker login -u $DOCKER_USER -p $DOCKER_PASS
+              docker build -f ./Dockerfile --rm=false -t buccaneerai/$SERVICE_NAME:$CIRCLE_SHA1 .
+              docker push buccaneerai/$SERVICE_NAME:$CIRCLE_SHA1
+              ./deploy.sh $SERVICE_NAME dev
+            fi
+      - deploy:
+          name: Deploy to prod
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              docker login -u $DOCKER_USER -p $DOCKER_PASS
+              docker build -f ./Dockerfile --rm=false -t buccaneerai/$SERVICE_NAME:$CIRCLE_SHA1 .
+              docker push buccaneerai/$SERVICE_NAME:$CIRCLE_SHA1
+              ./deploy.sh $SERVICE_NAME $CIRCLE_SHA1 prod
+            fi
+workflows:
+  version: 2
+  build_test_deploy:
+      jobs:
+        - build:
+            context: buccaneer

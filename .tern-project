@@ -1,0 +1,18 @@
+{
+  "libs": [
+    "browser",
+    "react",
+    "lodash",
+    "chai"
+  ],
+  "plugins": {
+     "node": {},
+     "modules": {},
+     "requirejs": {},
+     "es_modules": {},
+     "mocha": {},
+     "webpack": {}
+  },
+  "ecmaVersion": 7,
+  "dontLoad": ["node_modules/**"]
+}
