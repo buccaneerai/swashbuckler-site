@@ -6,7 +6,7 @@ build_defaults: &build_defaults
         password: $DOCKER_PASS
   environment:
     STAGE: local
-    SERVICE_NAME: buccaneer-site
+    SERVICE_NAME: swashbuckler-site
 
 version: 2
 jobs:
@@ -32,22 +32,13 @@ jobs:
       # - run:
       #     name: Lint
       #     command: yarn run lint
-      - run:
-          name: Test
-          command: yarn test
+      # - run:
+      #     name: Test
+      #     command: yarn test
       # - run:
       #     name: Security check for npm packages
       #     command: nsp check
       - setup_remote_docker
-      - deploy:
-          name: Deploy to dev
-          command: |
-            if [ "${CIRCLE_BRANCH}" == "dev" ]; then
-              docker login -u $DOCKER_USER -p $DOCKER_PASS
-              docker build -f ./Dockerfile --rm=false -t buccaneerai/$SERVICE_NAME:$CIRCLE_SHA1 .
-              docker push buccaneerai/$SERVICE_NAME:$CIRCLE_SHA1
-              ./deploy.sh $SERVICE_NAME dev
-            fi
       - deploy:
           name: Deploy to prod
           command: |
@@ -55,7 +46,6 @@ jobs:
               docker login -u $DOCKER_USER -p $DOCKER_PASS
               docker build -f ./Dockerfile --rm=false -t buccaneerai/$SERVICE_NAME:$CIRCLE_SHA1 .
               docker push buccaneerai/$SERVICE_NAME:$CIRCLE_SHA1
-              ./deploy.sh $SERVICE_NAME $CIRCLE_SHA1 prod
             fi
 workflows:
   version: 2
