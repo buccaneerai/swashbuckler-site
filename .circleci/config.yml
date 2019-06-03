@@ -7,6 +7,7 @@ build_defaults: &build_defaults
   environment:
     STAGE: local
     SERVICE_NAME: swashbuckler-site
+    REGISTRY_URL: 158277438783.dkr.ecr.us-east-1.amazonaws.com/swashbuckler-site
 
 version: 2
 jobs:
@@ -43,9 +44,13 @@ jobs:
           name: Deploy to prod
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              docker login -u $DOCKER_USER -p $DOCKER_PASS
-              docker build -f ./Dockerfile --rm=false -t buccaneerai/$SERVICE_NAME:$CIRCLE_SHA1 .
-              docker push buccaneerai/$SERVICE_NAME:$CIRCLE_SHA1
+              ECS_TOKEN=$(yarn --silent get-ecr-token)
+              docker login -u AWS -p $ECS_TOKEN https://158277438783.dkr.ecr.us-east-1.amazonaws.com
+              docker build -t $REGISTRY_URL:$CIRCLE_SHA1 .
+              docker build -t $REGISTRY_URL:prod .
+              docker push $REGISTRY_URL:$CIRCLE_SHA1
+              docker push $REGISTRY_URL:prod
+              yarn redeploy --stage prod --serviceName $SERVICE_NAME
             fi
 workflows:
   version: 2
