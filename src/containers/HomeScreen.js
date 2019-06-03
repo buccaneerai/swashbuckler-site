@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import {
   Button,
   Card,
@@ -17,6 +17,7 @@ import '../scss/prismjs/okaidia.scss';
 
 import colorHelpers from '../helpers/colorHelpers';
 import Jumbotron from '../components/Jumbotron';
+import Footer from '../components/Footer';
 import Features from '../components/Features';
 import ModelPerformance from '../components/ModelPerformance';
 import CodeWithoutHighlighting from '../components/CodeWithoutHighlighting';
@@ -74,7 +75,7 @@ model$.subscribe();
 const HomeScreen = function HomeScreen() {
   const primaryColor = colorHelpers.getBrandColor();
   return (
-    <div>
+    <Fragment>
       <Jumbotron
         logo='/logo.svg'
         headline={headline}
@@ -85,14 +86,14 @@ const HomeScreen = function HomeScreen() {
           <Col md={5}>
             <h2>
               Create your next ML project in pure, expressive Javascript.
-              Deploy it anytime, anywhere.
+              Deploy it anytime, anywhere, for anyone.
             </h2>
             <p>
               Swashbuckler provides ferocious implementations for common ML
               algorithms in native Javascript so that they can be trained or run
               on node.js servers, browsers, mobile applications (like
               React Native) or desktop applications (like Electron). It combines
-              all the power of modern ML combined with the liberating flexibility of
+              all the power of modern ML with the liberating flexibility of
               universal Javascript.
             </p>
           </Col>
@@ -111,11 +112,12 @@ const HomeScreen = function HomeScreen() {
           <Col md={{size: 5, offset: 2}}>
             <h2>Gold standard algorithms provide second-to-none accuracy.</h2>
             <p>
-              To be competitive with established ML libraries, Javascript needed
-              a toolkit that could match or beat their model performance.
+              To be competitive in the field of data science, Javascript needed
+              a toolkit that could match or beat the performance of established
+              ML libraries in other programming languages.
               Swashbuckler is carefully
               tested and benchmarked before each release to ensure that it
-              produces models that are on par with other gold standard ML libraries
+              produces models that are on par with other gold standard ML implementations
               (like Python's sklearn and R's caret).
             </p>
           </Col>
@@ -190,8 +192,18 @@ const HomeScreen = function HomeScreen() {
         <Row style={{paddingTop: '15vh'}}>
           <Col md={6}>
             <CodeWithoutHighlighting style={{minHeight: '11.5em'}}>
-              <Typist avgTypingDelay={50}>
-                npm i -g haven
+              <Typist
+                startDelay={5000}
+                avgTypingDelay={50}
+                cursor={{
+                  show: true,
+                  blink: true,
+                  element: '|',
+                  hideWhenDone: true,
+                  hideWhenDoneDelay: 300
+                }}
+              >
+                npm i -g @swashbuckler/haven
                 <Typist.Delay ms={500} />
                 <br/>
                 haven create my-saucy-new-project
@@ -200,10 +212,10 @@ const HomeScreen = function HomeScreen() {
                 cd my-saucy-new-project
                 <Typist.Delay ms={500} />
                 <br/>
-                haven commit -b master .
+                haven push -b master .
                 <Typist.Delay ms={500} />
                 <br/>
-                haven deploy -b master -stage production .
+                haven deploy -b master -env production .
               </Typist>
             </CodeWithoutHighlighting>
           </Col>
@@ -227,7 +239,8 @@ const HomeScreen = function HomeScreen() {
         <Row>
         </Row>
       </Container>
-    </div>
+      <Footer/>
+    </Fragment>
   );
 };
 

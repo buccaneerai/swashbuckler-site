@@ -13,10 +13,19 @@ const _Navbar = function _Navbar() {
         </NavbarBrand>
         <Nav className="ml-auto" navbar>
           <NavItem center left>
-            <NavLink href="/products/haven">Docs</NavLink>
+            <NavLink href="https://docs.swashbuckler.ai/quickstart">Get Started</NavLink>
           </NavItem>
           <NavItem center left>
-            <NavLink href="products/krakens">Guides</NavLink>
+            <NavLink href="https://docs.swashbuckler.ai">Docs</NavLink>
+          </NavItem>
+          <NavItem center left>
+            <NavLink href="https://docs.swashbuckler.ai">Guides</NavLink>
+          </NavItem>
+          <NavItem center left>
+            <NavLink href="https://github.com/buccaneerai/swashbuckler">
+              <i className='fab fa-github'/>{' '}
+              GitHub
+            </NavLink>
           </NavItem>
         </Nav>
       </Navbar>
