@@ -45,7 +45,7 @@ const pirates = [
 
 const trainingSet$ = from(pirates);
 const model$ = decisionTree.train(trainingSet$);
-model$.subscribe();
+model$.subscribe(model => model.saveToFile('./tree.json'));
 `;
 
 const functionalProgrammingExample = `
@@ -91,9 +91,9 @@ const HomeScreen = function HomeScreen() {
             <p>
               Swashbuckler provides ferocious implementations for common ML
               algorithms in native Javascript so that they can be trained or run
-              on node.js servers, browsers, mobile applications (like
-              React Native) or desktop applications (like Electron). It combines
-              all the power of modern ML with the liberating flexibility of
+              on node.js servers, browsers, mobile platforms (like
+              React Native), desktop environments (like Electron) and IoT devices.
+              It combines all the power of modern ML with the liberating flexibility of
               universal Javascript.
             </p>
           </Col>
@@ -110,12 +110,12 @@ const HomeScreen = function HomeScreen() {
             <ModelPerformance />
           </Col>
           <Col md={{size: 5, offset: 2}}>
-            <h2>Gold standard algorithms provide second-to-none accuracy.</h2>
+            <h2>Gold standard algorithms deliver second-to-none accuracy.</h2>
             <p>
               To be competitive in the field of data science, Javascript needed
               a toolkit that could match or beat the performance of established
               ML libraries in other programming languages.
-              Swashbuckler is carefully
+              Swashbuckler is meticulously
               tested and benchmarked before each release to ensure that it
               produces models that are on par with other gold standard ML implementations
               (like Python's sklearn and R's caret).
@@ -146,8 +146,8 @@ const HomeScreen = function HomeScreen() {
           </Col>
           <Col md={{size: 5, offset: 1}}>
             <h2>
-              Made for makers, not ivory towers. RxJS Observables power an intuitive, expressive
-              and reactive API.
+              Made for makers, not ivory towers. RxJS Observables power an expressive, intuitive
+              and reactive API. All Swashbuckler models are reactive, streamable and based on functional programming.
             </h2>
             <p>
               Most ML libraries were developed in academia (by statisticians) and
@@ -156,7 +156,8 @@ const HomeScreen = function HomeScreen() {
               those conventions to the wayside. Instead, it embraces the{' '}
               <a href="https://medium.com/javascript-scene/the-two-pillars-of-javascript-pt-2-functional-programming-a63aa53a41a4">
                 Second Pillar of Javascript
-              </a>{' '}and the <a href="https://rxjs-dev.firebaseapp.com/guide/overview">observable software pattern</a>.
+              </a>(functional programming) and the
+              <a href="https://rxjs-dev.firebaseapp.com/guide/overview">observable software pattern</a>.
               So the entire library
               is designed using simple programming concepts that
               most Javascript users already know and understand!

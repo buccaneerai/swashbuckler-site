@@ -23,17 +23,17 @@ const Footer = function Footer() {
           </a>
           <br/>
           <i className='fab fa-trello'/>{' '}
-          <a href="https://trello/">
+          <a href="https://trello.com/b/xJEagBZ8/swashbuckler">
             Trello (Roadmap)
           </a>
           <br/>
           <i className='fab fa-slack'/>{' '}
-          <a href="https://slack.com">
-            Slack (Discussion)
+          <a href="https://buccaneer-opensource.slack.com">
+            Slack (Public Discussion)
           </a>
           <br/>
           <i className='fab fa-medium'/>{' '}
-          <a href="https://trello/">
+          <a href="https://medium.com/buccaneer">
             Blog
           </a>
         </Col>
