@@ -12,8 +12,6 @@ const Footer = function Footer() {
           <a href="https://docs.swashbuckler.ai/quickstart">Get Started</a>
           <br/>
           <a href="https://docs.swashbuckler.ai/guides">Guides</a>
-          <br/>
-          <a href="https://youtube.com">Video Walkthroughs</a>
         </Col>
         <Col md={4}>
           <h6 style={{color: 'rgb(153,153,153)'}}>Community</h6>
@@ -38,7 +36,8 @@ const Footer = function Footer() {
           </a>
         </Col>
         <Col md={4}>
-          <h6 style={{color: 'rgb(153,153,153)'}}>Subscribe</h6>
+          <h6 style={{color: 'rgb(153,153,153)'}}>Terms</h6>
+          <p>This website is published under the <a href="https://opensource.org/licenses/MIT">MIT License</a>.</p>
         </Col>
       </Row>
     </Container>

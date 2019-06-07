@@ -29,7 +29,7 @@ const headline = (
 );
 
 const jumbotronBody = `
-  A simple, complete & opensource framework for Machine Learning at any scale.
+  A simple, complete & opensource library for machine learning at any scale.
   Made by builders who love Javascript. For builders who love Javascript.
 `;
 
@@ -85,11 +85,11 @@ const HomeScreen = function HomeScreen() {
         <Row style={{paddingTop: '2em'}}>
           <Col md={5}>
             <h2>
-              Create your next ML project in pure, expressive Javascript.
-              Deploy it anytime, anywhere, for anyone.
+              Create your next ML project in pure, expressive, full-stack Javascript.
+              Deploy it anytime. Anywhere. For anyone.
             </h2>
             <p>
-              Swashbuckler provides ferocious implementations for common ML
+              Swashbuckler provides hardy implementations for common ML
               algorithms in native Javascript so that they can be trained or run
               on node.js servers, browsers, mobile platforms (like
               React Native), desktop environments (like Electron) and IoT devices.
@@ -124,10 +124,12 @@ const HomeScreen = function HomeScreen() {
         </Row>
         <Row style={{paddingTop: '15vh'}}>
           <Col md={{size: 5}}>
-            <h2>Out-of-the-box d3 visualizations illuminate model performance.</h2>
+            <h2>
+              A picture is worth 1000 words. Out-of-the-box visualizations
+              illuminate model performance and provide interactivity.
+            </h2>
             <p>
-              A picture is worth 1000 words when it comes to understanding data.
-              Swashbuckler comes with a companion library called <a href="#">Lighthouse</a>, which
+              Swashbuckler comes with a companion library called <a href="#">crowsnest</a>, which
               makes it a breeze to visualize the performance of each model.
               Since Swashbuckler uses streamable Javascript under the hood,
               you can even see model performance and diagnose issues in real-time,
@@ -146,20 +148,21 @@ const HomeScreen = function HomeScreen() {
           </Col>
           <Col md={{size: 5, offset: 1}}>
             <h2>
-              Made for makers, not ivory towers. RxJS Observables power an expressive, intuitive
-              and reactive API. All Swashbuckler models are reactive, streamable and based on functional programming.
+              Made for makers, not ivory towers. Enjoy an
+              expressive, intuitive and fully reactive API powered by pure
+              functional programming.
             </h2>
             <p>
-              Most ML libraries were developed in academia (by statisticians) and
+              Most ML libraries were developed in academia and
               are designed around abstract
               mathematical concepts like vector algebra. Swashbuckler throws
               those conventions to the wayside. Instead, it embraces the{' '}
               <a href="https://medium.com/javascript-scene/the-two-pillars-of-javascript-pt-2-functional-programming-a63aa53a41a4">
                 Second Pillar of Javascript
-              </a>(functional programming) and the
-              <a href="https://rxjs-dev.firebaseapp.com/guide/overview">observable software pattern</a>.
+              </a> (functional programming) and the{' '}
+              <a href="https://rxjs-dev.firebaseapp.com/guide/overview">RxJS Observables</a>.
               So the entire library
-              is designed using simple programming concepts that
+              is designed using simple data streams and programming concepts that
               most Javascript users already know and understand!
             </p>
           </Col>
@@ -167,16 +170,19 @@ const HomeScreen = function HomeScreen() {
         <Row style={{paddingTop: '15vh'}}>
           <Col md={5}>
             <h2>
-              Swashbuckler middlewares deliver scale and speed.
+              Declarative middlewares deliver scale and speed. Spend less time
+              on infrastructure and more time doing what you do best.
             </h2>
             <p>
               Most ML libraries perform their calculations in-memory. This is
               great for hobbyist projects and small datasets but it can be problem
               for enterprise-scale data science.  Using middlewares, Swashbuckler
-              can run calculations in-memory or using a beefier computational
-              system like MongoDB or Apache Spark. You can declare what you want
-              Swashbuckler to do and leave it up to the middleware to determine
-              the fastest and most efficient way to do it!
+              can run calculations in-memory or swap out a beefier computational
+              engine like Haven, MongoDB or Apache Spark. Swashbuckler already
+              knows how to train models optimally on each platform so
+              you can simply declare what you want Swashbuckler to do and leave it
+              up to the middleware to determine the fastest and most efficient
+              way to do it!
             </p>
             <img src="/logo-aws.png" width='15%' style={{marginRight: '1em'}}/>
             <img src="/logo-gcp.jpg" width='45%'/>
